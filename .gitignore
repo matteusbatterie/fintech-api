@@ -1,0 +1,18 @@
+# .NET / Visual Studio
+[Bb]in/
+[Oo]bj/
+*.user
+*.userosscache
+*.sln.doccache
+.vs/
+.librarymanager.json
+
+# Docker
+docker-compose.override.yml*
+
+# Environment / OS
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db

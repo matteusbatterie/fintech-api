@@ -1,0 +1,16 @@
+# Handle line endings automatically for all text files
+* text=auto eol=lf
+
+# Ensure specific types are always treated as text and forced to LF
+*.cs text eol=lf
+*.sln text eol=lf
+*.slnx text eol=lf
+*.csproj text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+
+# Explicitly set binary files
+*.jpg binary
+*.png binary
+*.dll binary
