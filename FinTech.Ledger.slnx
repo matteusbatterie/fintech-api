@@ -16,4 +16,7 @@
     <Project Path="src/FinTech.Domain/FinTech.Domain.csproj" />
     <Project Path="src/FinTech.Infrastructure/FinTech.Infrastructure.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/FinTech.Domain.Tests/FinTech.Domain.Tests.csproj" />
+  </Folder>
 </Solution>
