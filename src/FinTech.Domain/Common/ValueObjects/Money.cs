@@ -7,9 +7,6 @@ public record Money
 
     public Money(decimal amount, string currency)
     {
-        if (amount < 0)
-            throw new ArgumentException("Money amount cannot be negative.");
-
         if (string.IsNullOrWhiteSpace(currency))
             throw new ArgumentException("Currency must be specified.");
 
