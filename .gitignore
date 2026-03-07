@@ -1,3 +1,8 @@
+# IDE/Tooling Temp Files
+*.tmp
+*.Backup.*
+*.log
+
 # .NET / Visual Studio
 [Bb]in/
 [Oo]bj/
@@ -6,6 +11,8 @@
 *.sln.doccache
 .vs/
 .librarymanager.json
+*.user
+*.userprefs
 
 # Docker
 docker-compose.override.yml*
