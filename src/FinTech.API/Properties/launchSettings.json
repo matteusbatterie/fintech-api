@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "FinTech.API": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:57889;http://localhost:57890"
+    }
+  }
+}

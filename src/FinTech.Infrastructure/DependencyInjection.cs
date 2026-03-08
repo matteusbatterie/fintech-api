@@ -15,6 +15,8 @@ public static class DependencyInjection
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
+        ArgumentException.ThrowIfNullOrEmpty(connectionString);
+
         services.AddDbContext<FinTechDbContext>(options =>
             options.UseSqlServer(connectionString));
 
