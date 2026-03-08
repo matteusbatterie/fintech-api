@@ -11,6 +11,16 @@ public class Entry : BaseEntity
     public EntryType Type { get; private set; }
     public string Description { get; private set; }
 
+
+    // Required by EF Core for materialization
+    private Entry() 
+    {
+        AccountId = Guid.Empty;
+        Amount = default!;
+        Type = default!;
+        Description = string.Empty;
+    }
+
     // Internal constructor: Entries should only be created by a Transaction
     internal Entry(Guid accountId, Money amount, EntryType type, string description)
     {

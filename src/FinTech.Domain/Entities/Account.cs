@@ -10,6 +10,14 @@ public class Account : BaseEntity
     public Money Balance { get; private set; }
 
 
+    // Required by EF Core for materialization
+    private Account() 
+    {
+        Name = default!;
+        Document = default!;
+        Balance = default!;
+    }
+
     public Account(string name, Document document, string currency)
     {
         if (string.IsNullOrWhiteSpace(name))

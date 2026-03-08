@@ -13,6 +13,10 @@ public class Transaction(string reference) : BaseEntity
     public string Reference { get; private set; } = reference;
 
 
+    // Required by EF Core for materialization
+    private Transaction() : this(string.Empty) { }
+
+
     public void AddEntry(Guid accountId, Money amount, EntryType type, string description)
     {
         var entry = new Entry(accountId, amount, type, description);
