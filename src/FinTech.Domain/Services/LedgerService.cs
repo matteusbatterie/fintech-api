@@ -17,8 +17,7 @@ public class LedgerService
         transaction.AddEntry(origin.Id, amount, EntryType.Debit, $"Transfer to {destination.Name}");
         transaction.AddEntry(destination.Id, amount, EntryType.Credit, $"Transfer from {origin.Name}");
 
-        if (!transaction.IsBalanced())
-            throw new InvalidOperationException("Transaction is not balanced.");
+        transaction.Post();
 
         // Update the actual account entities
         origin.Withdraw(amount);

@@ -1,10 +1,11 @@
 using FinTech.Domain.Common;
 using FinTech.Domain.Common.ValueObjects;
+using FinTech.Domain.Events;
 using FinTech.Domain.Exceptions;
 
 namespace FinTech.Domain.Entities;
 
-public class Account : BaseEntity
+public class Account : AggregateRoot
 {
     public string Name { get; private set; }
     public Document Document { get; private set; }
@@ -42,6 +43,8 @@ public class Account : BaseEntity
 
         EnsureSameCurrency(amount);
         Balance += amount;
+
+        Raise(new FundsDeposited(Id, amount));
     }
 
     public void Withdraw(Money amount)
@@ -55,6 +58,8 @@ public class Account : BaseEntity
             throw new InsufficientFundsException(Id, amount);
 
         Balance -= amount;
+
+        Raise(new FundsWithdrawn(Id, amount));
     }
 
     private void EnsureSameCurrency(Money amount)
