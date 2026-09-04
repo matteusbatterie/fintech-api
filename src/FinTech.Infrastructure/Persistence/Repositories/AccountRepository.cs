@@ -7,21 +7,14 @@ namespace FinTech.Infrastructure.Persistence.Repositories;
 public class AccountRepository(FinTechDbContext context) : IAccountRepository
 {
     public async Task<Account?> GetByIdAsync(Guid id)
+        => await context.Accounts.FirstOrDefaultAsync(a => a.Id == id);
+
+    public void Update(Account account)
     {
-        return await context.Accounts
-            .FirstOrDefaultAsync(a => a.Id == id);
-    }
-
-    public async Task SaveAsync(Account account, Transaction transaction)
-    {
-        var accountEntry = context.Entry(account);
-        if (accountEntry.State == EntityState.Detached)
-        {
-            context.Accounts.Update(account);
-        }
-
-        await context.Transactions.AddAsync(transaction);
-
-        await context.SaveChangesAsync();
+        if (context.Entry(account).State == EntityState.Detached)
+            context.Accounts.Attach(account).State = EntityState.Modified;
+        // If it's already tracked (the normal case — fetched via GetByIdAsync
+        // in this same request), this is a no-op; EF already sees the changes
+        // made by Deposit()/Withdraw(). This just guards the detached case.
     }
 }
