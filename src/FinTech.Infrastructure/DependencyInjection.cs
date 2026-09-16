@@ -1,4 +1,5 @@
 using FinTech.Domain.Interfaces;
+using FinTech.Infrastructure.Events;
 using FinTech.Infrastructure.Persistence;
 using FinTech.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,16 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("DefaultConnection");
-
+            
         ArgumentException.ThrowIfNullOrEmpty(connectionString);
 
         services.AddDbContext<FinTechDbContext>(options =>
             options.UseSqlServer(connectionString));
 
         services.AddScoped<IAccountRepository, AccountRepository>();
+        services.AddScoped<ITransactionRepository, TransactionRepository>();
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddScoped<IDomainEventDispatcher, LoggingDomainEventDispatcher>();
 
         return services;
     }
