@@ -13,8 +13,7 @@ public class AccountRepository(FinTechDbContext context) : IAccountRepository
     {
         if (context.Entry(account).State == EntityState.Detached)
             context.Accounts.Attach(account).State = EntityState.Modified;
-        // If it's already tracked (the normal case — fetched via GetByIdAsync
-        // in this same request), this is a no-op; EF already sees the changes
+        // If it's already tracked, this is a no-op; EF already sees the changes
         // made by Deposit()/Withdraw(). This just guards the detached case.
     }
 }
