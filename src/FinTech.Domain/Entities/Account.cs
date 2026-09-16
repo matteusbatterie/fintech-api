@@ -28,6 +28,8 @@ public class Account : AggregateRoot
         Name = name;
         Document = document;
         Balance = new Money(0, currency);
+
+        Raise(new AccountOpened(Id, currency));
     }
 
     [Obsolete("Use Deposit and Withdraw methods instead.")]
