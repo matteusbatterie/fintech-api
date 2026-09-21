@@ -10,3 +10,5 @@ public class InsufficientFundsException(Guid accountId, Money attempted)
 public class CurrencyMismatchException(string expected, string actual)
     : DomainException($"Currency mismatch: expected {expected}, but received {actual}.");
 
+public class ConcurrencyConflictException(Guid accountId)
+    : DomainException($"Account {accountId} has been modified by another operation. Please retry.");

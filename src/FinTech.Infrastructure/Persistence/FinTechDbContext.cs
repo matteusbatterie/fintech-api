@@ -1,3 +1,4 @@
+using FinTech.Domain.Common;
 using FinTech.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ public class FinTechDbContext(DbContextOptions<FinTechDbContext> options) : DbCo
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Ignore<DomainEvent>();
+
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(FinTechDbContext).Assembly);
 
         base.OnModelCreating(modelBuilder);

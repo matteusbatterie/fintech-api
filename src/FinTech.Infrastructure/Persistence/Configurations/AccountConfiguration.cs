@@ -16,6 +16,9 @@ internal class AccountConfiguration : IEntityTypeConfiguration<Account>
             .IsRequired()
             .HasMaxLength(100);
 
+        builder.Property(a => a.RowVersion)
+            .IsRowVersion();
+
         // Value Object: Balance (Money)
         builder.OwnsOne(a => a.Balance, b =>
         {

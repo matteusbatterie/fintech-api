@@ -10,6 +10,7 @@ public class Account : AggregateRoot
     public string Name { get; private set; }
     public Document Document { get; private set; }
     public Money Balance { get; private set; }
+    public byte[] RowVersion { get; private set; } = default!;
 
 
     // Required by EF Core for materialization
