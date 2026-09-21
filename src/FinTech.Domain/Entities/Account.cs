@@ -33,12 +33,6 @@ public class Account : AggregateRoot
         Raise(new AccountOpened(Id, currency));
     }
 
-    [Obsolete("Use Deposit and Withdraw methods instead.")]
-    public void UpdateBalance(Money amount)
-    {
-        Balance += amount;
-    }
-
     public void Deposit(Money amount)
     {
         if (amount.Amount <= 0)
