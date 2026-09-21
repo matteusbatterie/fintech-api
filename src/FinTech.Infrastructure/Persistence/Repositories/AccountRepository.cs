@@ -9,6 +9,9 @@ public class AccountRepository(FinTechDbContext context) : IAccountRepository
     public async Task<Account?> GetByIdAsync(Guid id)
         => await context.Accounts.FirstOrDefaultAsync(a => a.Id == id);
 
+    public async Task AddAsync(Account account)
+        => await context.Accounts.AddAsync(account);
+
     public void Update(Account account)
     {
         if (context.Entry(account).State == EntityState.Detached)
