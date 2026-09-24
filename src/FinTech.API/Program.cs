@@ -1,9 +1,7 @@
+using DotNetEnv;
+using FinTech.Application;
 using FinTech.Infrastructure;
 using Scalar.AspNetCore;
-using DotNetEnv;
-
-// Load the .env file first
-Env.Load();
 
 // Load and interpolate variables inside the .env file
 Env.TraversePath().Load();
@@ -19,7 +17,10 @@ if (string.IsNullOrEmpty(connectionString))
     throw new Exception("ConnectionString is null! Check if .env is in the root folder.");
 }
 
-// Register your Infrastructure
+// Register Application services
+builder.Services.AddApplication();
+
+// Register Infrastructure services
 builder.Services.AddInfrastructure(builder.Configuration);
 
 // Standard API services

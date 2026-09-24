@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FinTech.Infrastructure\FinTech.Infrastructure.csproj" />
+    <ProjectReference Include="..\FinTech.Application\FinTech.Application.csproj" />
   </ItemGroup>
 
   <ItemGroup>

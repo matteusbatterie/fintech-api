@@ -1,4 +1,6 @@
 using FinTech.Domain.Interfaces;
+using FinTech.Domain.Services;
+using FinTech.Domain.Services.Validators;
 using FinTech.Infrastructure.Events;
 using FinTech.Infrastructure.Persistence;
 using FinTech.Infrastructure.Persistence.Repositories;
@@ -21,10 +23,14 @@ public static class DependencyInjection
         services.AddDbContext<FinTechDbContext>(options =>
             options.UseSqlServer(connectionString));
 
+        services.AddScoped<LedgerService>();
         services.AddScoped<IAccountRepository, AccountRepository>();
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IDomainEventDispatcher, LoggingDomainEventDispatcher>();
+
+        services.AddScoped<DocumentValidatorFactory>();
+        services.AddScoped<IDocumentValidator, BrazilDocumentValidator>();
 
         return services;
     }
