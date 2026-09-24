@@ -2,8 +2,10 @@ using FinTech.Domain.Interfaces;
 using FinTech.Domain.Services;
 using FinTech.Domain.Services.Validators;
 using FinTech.Infrastructure.Events;
+using FinTech.Infrastructure.Idempotency;
 using FinTech.Infrastructure.Persistence;
 using FinTech.Infrastructure.Persistence.Repositories;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +30,8 @@ public static class DependencyInjection
         services.AddScoped<ITransactionRepository, TransactionRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IDomainEventDispatcher, LoggingDomainEventDispatcher>();
+
+        services.AddScoped(typeof(IPipelineBehavior<,>), typeof(IdempotencyBehavior<,>));
 
         services.AddScoped<DocumentValidatorFactory>();
         services.AddScoped<IDocumentValidator, BrazilDocumentValidator>();

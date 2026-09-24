@@ -1,5 +1,6 @@
 using FinTech.Domain.Common;
 using FinTech.Domain.Entities;
+using FinTech.Infrastructure.Idempotency;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinTech.Infrastructure.Persistence;
@@ -8,6 +9,7 @@ public class FinTechDbContext(DbContextOptions<FinTechDbContext> options) : DbCo
 {
     public DbSet<Account> Accounts => Set<Account>();
     public DbSet<Transaction> Transactions => Set<Transaction>();
+    public DbSet<IdempotencyRecord> IdempotencyRecords => Set<IdempotencyRecord>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
