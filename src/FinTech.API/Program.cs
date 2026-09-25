@@ -19,11 +19,11 @@ if (string.IsNullOrEmpty(connectionString))
     throw new Exception("ConnectionString is null! Check if .env is in the root folder.");
 }
 
-// Register Infrastructure services
-builder.Services.AddInfrastructure(builder.Configuration);
-
 // Register Application services
 builder.Services.AddApplication();
+
+// Register Infrastructure services
+builder.Services.AddInfrastructure(builder.Configuration);
 
 // Standard API services
 builder.Services.AddOpenApi();
