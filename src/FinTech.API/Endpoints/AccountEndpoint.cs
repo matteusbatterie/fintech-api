@@ -1,5 +1,3 @@
-using System.Security.Cryptography;
-using Azure.Core;
 using FinTech.Application.Accounts.Commands.Deposit;
 using FinTech.Application.Accounts.Commands.OpenAccount;
 using FinTech.Application.Accounts.Commands.Withdraw;
