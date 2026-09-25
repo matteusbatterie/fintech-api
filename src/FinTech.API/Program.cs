@@ -1,4 +1,6 @@
 using DotNetEnv;
+using FinTech.API;
+using FinTech.API.Endpoints;
 using FinTech.Application;
 using FinTech.Infrastructure;
 using Scalar.AspNetCore;
@@ -17,15 +19,17 @@ if (string.IsNullOrEmpty(connectionString))
     throw new Exception("ConnectionString is null! Check if .env is in the root folder.");
 }
 
-// Register Application services
-builder.Services.AddApplication();
-
 // Register Infrastructure services
 builder.Services.AddInfrastructure(builder.Configuration);
 
+// Register Application services
+builder.Services.AddApplication();
+
 // Standard API services
-builder.Services.AddControllers();
 builder.Services.AddOpenApi();
+
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddProblemDetails();
 
 var app = builder.Build();
 
@@ -39,5 +43,7 @@ if (app.Environment.IsDevelopment())
     app.MapScalarApiReference();
 }
 
-app.MapControllers();
+app.UseExceptionHandler();
+app.MapAccountEndpoints();
+app.MapTransactionEndpoints();
 app.Run();
