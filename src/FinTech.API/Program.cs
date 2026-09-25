@@ -47,3 +47,6 @@ app.UseExceptionHandler();
 app.MapAccountEndpoints();
 app.MapTransactionEndpoints();
 app.Run();
+
+
+public partial class Program { }
