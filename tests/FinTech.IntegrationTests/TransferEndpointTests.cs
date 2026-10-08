@@ -55,8 +55,8 @@ public class TransferEndpointTests : IClassFixture<FinTechApiFactory>
         transferResponse.StatusCode.Should().Be(HttpStatusCode.Created);
 
         // Assert
-        var origin = await _client.GetFromJsonAsync<AccountDto>("api/accounts/{originId}");
-        var destination = await _client.GetFromJsonAsync<AccountDto>("api/accounts/{destId}");
+        var origin = await _client.GetFromJsonAsync<AccountDto>($"api/accounts/{originId}");
+        var destination = await _client.GetFromJsonAsync<AccountDto>($"api/accounts/{destId}");
 
         origin!.Balance.Should().Be(300m);
         destination!.Balance.Should().Be(200m);

@@ -27,8 +27,10 @@ public class Entry : BaseEntity
         if (amount.Amount <= 0)
             throw new ArgumentException("Amount must be greater than zero.", nameof(amount));
 
+        // Each Entry must own its own Money instance: EF tracks owned types by
+        // reference, so two entries sharing one instance would steal it from each other.
+        Amount = new Money(amount.Amount, amount.Currency);
         AccountId = accountId;
-        Amount = amount;
         Type = type;
         Description = description;
     }
