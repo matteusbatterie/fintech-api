@@ -20,7 +20,7 @@ internal class AccountConfiguration : IEntityTypeConfiguration<Account>
             .IsRowVersion();
 
         // Value Object: Balance (Money)
-        builder.OwnsOne(a => a.Balance, b =>
+        builder.ComplexProperty(a => a.Balance, b =>
         {
             b.Property(m => m.Amount)
                 .HasColumnName("BalanceAmount")
@@ -32,7 +32,7 @@ internal class AccountConfiguration : IEntityTypeConfiguration<Account>
         });
 
         // Value Object: Document
-        builder.OwnsOne(a => a.Document, d =>
+        builder.ComplexProperty(a => a.Document, d =>
         {
             d.Property(doc => doc.Number)
                 .HasColumnName("DocumentNumber")

@@ -14,7 +14,7 @@ internal class EntryConfiguration : IEntityTypeConfiguration<Entry>
         builder.Property(e => e.Description).HasMaxLength(250);
         builder.Property(e => e.Type);
 
-        builder.OwnsOne(e => e.Amount, a =>
+        builder.ComplexProperty(e => e.Amount, a =>
         {
             a.Property(m => m.Amount)
                 .HasColumnName("Amount")
