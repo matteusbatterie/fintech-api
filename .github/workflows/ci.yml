@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+concurrency:
+    group: ci-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    build-and-test:
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-dotnet@v4
+            with:
+                dotnet-version: '10.0.x'
+
+            # .env is gitignored, the template gives Program.cs a placeholder
+            # connection string. The integration tests replace it with a Testcontainers one.
+            - name: Create .env from template
+            run: cp .env.example .env
+
+            - name: Restore
+            run: dotnet restore FinTech.Ledger.slnx
+
+            - name: Build
+            run: dotnet build FinTech.Ledger.slnx --no-restore --configuration Release
+
+            - name: Test
+            run: dotnet test FinTech.Ledger.slnx --no-build --configuration Release --verbosity normal
+
